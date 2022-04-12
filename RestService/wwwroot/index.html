@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Api service</title>
+</head>
+<body>
+    <form name="dataForm">
+        <span>Enter Url</span>
+        <input name="url" type="text"/>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        async function AddUrl(url)
+        {
+            const response = await fetch("api/values", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    url: url,
+                })
+            });
+        }
+
+        document.forms["dataForm"].addEventListener("submit", e =>
+        {
+            e.preventDefault();
+            const form = document.forms["dataForm"];
+            const url = form.elements["url"].value;
+            AddUrl(url);
+        });
+    </script>
+</body>
+</html>
